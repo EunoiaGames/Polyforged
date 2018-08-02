@@ -22,6 +22,7 @@
     <ClCompile Include="Src\DataStructures\String.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
+    <ClCompile Include="Src\Platform\D3D11\RenderContextD3D11.cpp" />
     <ClCompile Include="Src\Platform\Opengl\RenderContextGL.cpp" />
     <ClCompile Include="Src\Platform\Windows\Win32Display.cpp" />
     <ClCompile Include="Src\Rendering\Display.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="Src\DataStructures\String.h" />
     <ClInclude Include="Src\Math\GeneralMath.h" />
     <ClInclude Include="Src\Math\Math.h" />
+    <ClInclude Include="Src\Platform\D3D11\RenderContextD3D11.h" />
     <ClInclude Include="Src\Platform\Opengl\RenderContextGL.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
     <ClInclude Include="Src\Rendering\Display.h" />

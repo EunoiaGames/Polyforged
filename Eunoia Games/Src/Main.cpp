@@ -5,7 +5,7 @@ int main()
 	using namespace Eunoia;
 	using namespace Rendering;
 
-	Display* pDisplay = Display::CreateDisplay("Polyforged", 1280, 720, GraphicsAPI::GRAPHICS_API_OPENGL);
+	Display* pDisplay = Display::CreateDisplay("Polyforged", 1280, 720, GRAPHICS_API_D3D11);
 
 	RenderContext* pContext = RenderContext::GetRenderContext();
 	pContext->SetDisplayAsRenderTarget();
