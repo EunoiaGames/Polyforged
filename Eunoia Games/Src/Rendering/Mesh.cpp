@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "../Platform/Opengl/MeshGL.h"
+#include "../Platform/D3D11/MeshD3D11.h"
 #include "../Rendering/RenderContext.h"
 
 namespace Eunoia { namespace Rendering {
@@ -8,7 +9,7 @@ namespace Eunoia { namespace Rendering {
 	{
 		switch (RenderContext::GetGraphicsAPI())
 		{
-		case GRAPHICS_API_D3D11: break;
+		case GRAPHICS_API_D3D11: return new MeshD3D11(pVertices, numVertices, pIndices, numIndices, usage);
 		case GRAPHICS_API_OPENGL: return new MeshGL(pVertices, numVertices, pIndices, numIndices, usage);
 		}
 	}

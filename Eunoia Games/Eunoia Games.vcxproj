@@ -22,32 +22,51 @@
     <ClCompile Include="Src\DataStructures\String.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
+    <ClCompile Include="Src\Platform\D3D11\MeshD3D11.cpp" />
     <ClCompile Include="Src\Platform\D3D11\RenderContextD3D11.cpp" />
+    <ClCompile Include="Src\Platform\D3D11\ShaderD3D11.cpp" />
     <ClCompile Include="Src\Platform\Opengl\MeshGL.cpp" />
     <ClCompile Include="Src\Platform\Opengl\RenderContextGL.cpp" />
+    <ClCompile Include="Src\Platform\Opengl\ShaderGL.cpp" />
     <ClCompile Include="Src\Platform\Windows\Win32Display.cpp" />
     <ClCompile Include="Src\Rendering\Display.cpp" />
     <ClCompile Include="Src\Rendering\Mesh.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
+    <ClCompile Include="Src\Rendering\Shader.cpp" />
+    <ClCompile Include="Src\Utils\DataBuffer.cpp" />
+    <ClCompile Include="Src\Utils\FileReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Core\Common.h" />
     <ClInclude Include="Src\DataStructures\String.h" />
     <ClInclude Include="Src\Math\GeneralMath.h" />
     <ClInclude Include="Src\Math\Math.h" />
+    <ClInclude Include="Src\Platform\D3D11\MeshD3D11.h" />
     <ClInclude Include="Src\Platform\D3D11\RenderContextD3D11.h" />
+    <ClInclude Include="Src\Platform\D3D11\ShaderD3D11.h" />
     <ClInclude Include="Src\Platform\Opengl\MeshGL.h" />
     <ClInclude Include="Src\Platform\Opengl\RenderContextGL.h" />
+    <ClInclude Include="Src\Platform\Opengl\ShaderGL.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
     <ClInclude Include="Src\Rendering\Display.h" />
     <ClInclude Include="Src\Rendering\Mesh.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />
+    <ClInclude Include="Src\Rendering\Shader.h" />
     <ClInclude Include="Src\Rendering\Vertex.h" />
+    <ClInclude Include="Src\Utils\DataBuffer.h" />
+    <ClInclude Include="Src\Utils\FileReader.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Res\Audio\a.txt" />
-    <Text Include="Res\Models\a.txt" />
-    <Text Include="Res\Textures\a.txt" />
+    <None Include="Res\Shaders\GLSL\Test.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\Shaders\HLSL\Test.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED7BD6AC-9BD4-49A7-B348-B191F1F2D235}</ProjectGuid>
@@ -118,7 +137,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32s.lib;opengl32.lib;d3d11.lib;dxgi.lib;D3DCompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -129,7 +148,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32s.lib;opengl32.lib;d3d11.lib;dxgi.lib;D3DCompiler.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +161,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -157,7 +176,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

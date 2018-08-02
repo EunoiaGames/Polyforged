@@ -45,6 +45,24 @@
     <ClCompile Include="Src\Rendering\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Platform\D3D11\MeshD3D11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Platform\Opengl\ShaderGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Utils\FileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Rendering\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Platform\D3D11\ShaderD3D11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Utils\DataBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Rendering\Display.h">
@@ -83,10 +101,27 @@
     <ClInclude Include="Src\Platform\Opengl\MeshGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Platform\D3D11\MeshD3D11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Rendering\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Platform\Opengl\ShaderGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utils\FileReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Platform\D3D11\ShaderD3D11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utils\DataBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Res\Models\a.txt" />
-    <Text Include="Res\Audio\a.txt" />
-    <Text Include="Res\Textures\a.txt" />
+    <None Include="Res\Shaders\GLSL\Test.glsl" />
+    <None Include="Res\Shaders\HLSL\Test.hlsl" />
   </ItemGroup>
 </Project>

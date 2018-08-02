@@ -9,6 +9,7 @@ namespace Eunoia { namespace Rendering {
 	{
 	public:
 		MeshGL(const Vertex* pVertices, uint32 numVertices, const uint32* indices, uint32 numIndices, MeshUsage usage);
+		~MeshGL();
 
 		void Render() const override;
 		void Map(Vertex* pVertices) const override;

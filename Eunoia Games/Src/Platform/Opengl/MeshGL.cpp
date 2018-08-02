@@ -18,10 +18,18 @@ namespace Eunoia { namespace Rendering {
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32) * numIndices, pIndices, GL_STATIC_DRAW);
 
 		glVertexAttribPointer(VERTEX_ATTRIBUTE_POS, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::pos));
+		glVertexAttribPointer(VERTEX_ATTRIBUTE_COLOR, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::color));
 
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	MeshGL::~MeshGL()
+	{
+		glDeleteVertexArrays(1, &m_vao);
+		glDeleteBuffers(1, &m_vbo);
+		glDeleteBuffers(1, &m_ibo);
 	}
 
 	void MeshGL::Render() const
