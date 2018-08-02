@@ -10,6 +10,8 @@ int main()
 	RenderContext* pContext = RenderContext::GetRenderContext();
 	pContext->SetDisplayAsRenderTarget();
 
+	int i = 0;
+
 	while (!pDisplay->ShouldClose())
 	{
 		pContext->Clear();
