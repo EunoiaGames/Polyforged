@@ -23,9 +23,11 @@
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Platform\D3D11\RenderContextD3D11.cpp" />
+    <ClCompile Include="Src\Platform\Opengl\MeshGL.cpp" />
     <ClCompile Include="Src\Platform\Opengl\RenderContextGL.cpp" />
     <ClCompile Include="Src\Platform\Windows\Win32Display.cpp" />
     <ClCompile Include="Src\Rendering\Display.cpp" />
+    <ClCompile Include="Src\Rendering\Mesh.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,10 +36,18 @@
     <ClInclude Include="Src\Math\GeneralMath.h" />
     <ClInclude Include="Src\Math\Math.h" />
     <ClInclude Include="Src\Platform\D3D11\RenderContextD3D11.h" />
+    <ClInclude Include="Src\Platform\Opengl\MeshGL.h" />
     <ClInclude Include="Src\Platform\Opengl\RenderContextGL.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
     <ClInclude Include="Src\Rendering\Display.h" />
+    <ClInclude Include="Src\Rendering\Mesh.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />
+    <ClInclude Include="Src\Rendering\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Res\Audio\a.txt" />
+    <Text Include="Res\Models\a.txt" />
+    <Text Include="Res\Textures\a.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED7BD6AC-9BD4-49A7-B348-B191F1F2D235}</ProjectGuid>
