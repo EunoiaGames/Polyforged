@@ -19,7 +19,7 @@ namespace Eunoia { namespace Rendering {
 		uint16 GetWidth() const override;
 		uint16 GetHeight() const override;
 		//const String& GetTitle() const override;
-		//Core::DisplayInput* GetInput() const override;
+		Core::DisplayInput* GetInput() const override;
 
 		//void Resize(unsigned int width, unsigned int height) override;
 
@@ -40,7 +40,7 @@ namespace Eunoia { namespace Rendering {
 		uint16 m_width;
 		uint16 m_height;
 
-		//Core::DisplayInput* m_pInput;
+		Core::DisplayInput* m_pInput;
 
 		bool m_close;
 	};

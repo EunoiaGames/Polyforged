@@ -1,5 +1,5 @@
 #include "Win32Display.h"
-//#include "Win32Input.h"
+#include "Win32Input.h"
 
 namespace Eunoia { namespace Rendering {
 
@@ -80,7 +80,7 @@ namespace Eunoia { namespace Rendering {
 
 		std::cout << "Successfuly created Win32 window" << std::endl;
 
-		//m_pInput = new Core::Win32Input(m_windowHandle);
+		m_pInput = new Core::Win32Input(m_windowHandle);
 
 		RenderContext::InitGraphicsAPI(api);
 		RenderContext::GetRenderContext()->SetViewport(0.0f, 0.0f, m_width, m_height);
@@ -109,10 +109,10 @@ namespace Eunoia { namespace Rendering {
 		return m_height;
 	}
 
-	//Core::DisplayInput * Win32Display::GetInput() const
-	//{
-	//	return m_pInput;
-	//}
+	Core::DisplayInput * Win32Display::GetInput() const
+	{
+		return m_pInput;
+	}
 
 //	const String & Win32Display::GetTitle() const
 //	{
@@ -232,12 +232,12 @@ namespace Eunoia { namespace Rendering {
 			if (pInput->data.keyboard.Message == WM_KEYDOWN)
 			{
 				USHORT key = pInput->data.keyboard.MakeCode;
-				//Display::GetDisplay()->GetInput()->SetKeyState(key, true);
+				Display::GetDisplay()->GetInput()->SetKeyState(key, true);
 			}
 			else if (pInput->data.keyboard.Message == WM_KEYUP)
 			{
 				USHORT key = pInput->data.keyboard.MakeCode;
-				//Display::GetDisplay()->GetInput()->SetKeyState(key, false);
+				Display::GetDisplay()->GetInput()->SetKeyState(key, false);
 			}
 		}
 		else if (pInput->header.dwType == RIM_TYPEMOUSE)
@@ -267,7 +267,7 @@ namespace Eunoia { namespace Rendering {
 
 			if (buttonStatus != -1)
 			{
-				//Display::GetDisplay()->GetInput()->SetMouseButtonState(engineButton, buttonStatus);
+				Display::GetDisplay()->GetInput()->SetMouseButtonState(engineButton, buttonStatus);
 			}
 		}
 

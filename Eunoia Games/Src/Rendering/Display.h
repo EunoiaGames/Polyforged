@@ -3,7 +3,7 @@
 #include "../DataStructures/String.h"
 #include "../Core/Common.h"
 #include "RenderContext.h"
-//#include "../Core/DisplayInput.h"
+#include "../Core/DisplayInput.h"
 #include "../Math/Math.h"
 
 namespace Eunoia { namespace Rendering {
@@ -25,7 +25,7 @@ namespace Eunoia { namespace Rendering {
 
 		inline Math::Vector2f GetSize() const { return Math::Vector2f(GetWidth(), GetHeight()); }
 
-		//virtual Core::DisplayInput* GetInput() const = 0;
+		virtual Core::DisplayInput* GetInput() const = 0;
 
 		static Display* CreateDisplay(const String& title, uint16 width, uint16 height, GraphicsAPI api);
 		static Display* GetDisplay();

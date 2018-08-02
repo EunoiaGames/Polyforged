@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Core\DisplayInput.cpp" />
+    <ClCompile Include="Src\Core\ECS\Component.cpp" />
     <ClCompile Include="Src\DataStructures\String.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
@@ -29,6 +31,7 @@
     <ClCompile Include="Src\Platform\Opengl\RenderContextGL.cpp" />
     <ClCompile Include="Src\Platform\Opengl\ShaderGL.cpp" />
     <ClCompile Include="Src\Platform\Windows\Win32Display.cpp" />
+    <ClCompile Include="Src\Platform\Windows\Win32Input.cpp" />
     <ClCompile Include="Src\Rendering\Display.cpp" />
     <ClCompile Include="Src\Rendering\Mesh.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
@@ -38,6 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Core\Common.h" />
+    <ClInclude Include="Src\Core\DisplayInput.h" />
+    <ClInclude Include="Src\Core\ECS\Component.h" />
+    <ClInclude Include="Src\Core\ECS\ECSTypes.h" />
+    <ClInclude Include="Src\Core\ECS\Entity.h" />
+    <ClInclude Include="Src\Core\ECS\System.h" />
+    <ClInclude Include="Src\Core\InputDefs.h" />
     <ClInclude Include="Src\DataStructures\String.h" />
     <ClInclude Include="Src\Math\GeneralMath.h" />
     <ClInclude Include="Src\Math\Math.h" />
@@ -48,6 +57,7 @@
     <ClInclude Include="Src\Platform\Opengl\RenderContextGL.h" />
     <ClInclude Include="Src\Platform\Opengl\ShaderGL.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
+    <ClInclude Include="Src\Platform\Windows\Win32Input.h" />
     <ClInclude Include="Src\Rendering\Display.h" />
     <ClInclude Include="Src\Rendering\Mesh.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />

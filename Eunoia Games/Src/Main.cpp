@@ -31,6 +31,7 @@ int main()
 		pMesh->Render();
 
 		pDisplay->Update();
+		pDisplay->GetInput()->Update();
 		pContext->Swap();
 	}
 }
