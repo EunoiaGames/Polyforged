@@ -2,6 +2,8 @@
 #include <vector>
 #include "ECSTypes.h"
 
+#define DECLARE_COMPONENT(Name) struct Name : public Eunoia::Core::Component<Name>
+
 namespace Eunoia { namespace Core {
 
 	struct StaticComponentData

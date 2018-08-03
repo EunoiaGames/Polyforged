@@ -2,6 +2,7 @@
 
 #include "Vertex.h"
 #include <vector>
+#include "Material.h"
 
 namespace Eunoia { namespace Rendering {
 
@@ -24,4 +25,14 @@ namespace Eunoia { namespace Rendering {
 		static Mesh* CreateMesh(const std::vector<Vertex>& vertices, const std::vector<uint32>& indices, MeshUsage usage);
 	};
 
+	struct MaterialMesh
+	{
+		MaterialMesh(Mesh* pMesh, Material material = Material()) :
+			pMesh(pMesh),
+			material(material)
+		{}
+
+		Mesh* pMesh;
+		Material material;
+	};
 } }

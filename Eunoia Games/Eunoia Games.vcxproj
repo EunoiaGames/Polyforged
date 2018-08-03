@@ -19,11 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Core\Application.cpp" />
+    <ClCompile Include="Src\Core\CoreEngine.cpp" />
     <ClCompile Include="Src\Core\DisplayInput.cpp" />
     <ClCompile Include="Src\Core\ECS\Component.cpp" />
+    <ClCompile Include="Src\Core\ECS\Systems\RenderSystem.cpp" />
+    <ClCompile Include="Src\Core\PolyforgedApplication.cpp" />
     <ClCompile Include="Src\DataStructures\String.cpp" />
-    <ClCompile Include="Src\Main.cpp" />
+    <ClCompile Include="Src\Core\Main.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
+    <ClCompile Include="Src\Math\Transform.cpp" />
     <ClCompile Include="Src\Platform\D3D11\MeshD3D11.cpp" />
     <ClCompile Include="Src\Platform\D3D11\RenderContextD3D11.cpp" />
     <ClCompile Include="Src\Platform\D3D11\ShaderD3D11.cpp" />
@@ -35,21 +40,30 @@
     <ClCompile Include="Src\Rendering\Display.cpp" />
     <ClCompile Include="Src\Rendering\Mesh.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
+    <ClCompile Include="Src\Rendering\RenderingEngine.cpp" />
     <ClCompile Include="Src\Rendering\Shader.cpp" />
     <ClCompile Include="Src\Utils\DataBuffer.cpp" />
     <ClCompile Include="Src\Utils\FileReader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Core\Application.h" />
     <ClInclude Include="Src\Core\Common.h" />
+    <ClInclude Include="Src\Core\CoreEngine.h" />
     <ClInclude Include="Src\Core\DisplayInput.h" />
     <ClInclude Include="Src\Core\ECS\Component.h" />
+    <ClInclude Include="Src\Core\ECS\Components\MaterialComponent.h" />
+    <ClInclude Include="Src\Core\ECS\Components\MeshComponent.h" />
+    <ClInclude Include="Src\Core\ECS\Components\TransformComponent.h" />
     <ClInclude Include="Src\Core\ECS\ECSTypes.h" />
     <ClInclude Include="Src\Core\ECS\Entity.h" />
     <ClInclude Include="Src\Core\ECS\System.h" />
+    <ClInclude Include="Src\Core\ECS\Systems\RenderSystem.h" />
     <ClInclude Include="Src\Core\InputDefs.h" />
+    <ClInclude Include="Src\Core\PolyforgedApplication.h" />
     <ClInclude Include="Src\DataStructures\String.h" />
     <ClInclude Include="Src\Math\GeneralMath.h" />
     <ClInclude Include="Src\Math\Math.h" />
+    <ClInclude Include="Src\Math\Transform.h" />
     <ClInclude Include="Src\Platform\D3D11\MeshD3D11.h" />
     <ClInclude Include="Src\Platform\D3D11\RenderContextD3D11.h" />
     <ClInclude Include="Src\Platform\D3D11\ShaderD3D11.h" />
@@ -59,8 +73,10 @@
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Input.h" />
     <ClInclude Include="Src\Rendering\Display.h" />
+    <ClInclude Include="Src\Rendering\Material.h" />
     <ClInclude Include="Src\Rendering\Mesh.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />
+    <ClInclude Include="Src\Rendering\RenderingEngine.h" />
     <ClInclude Include="Src\Rendering\Shader.h" />
     <ClInclude Include="Src\Rendering\Vertex.h" />
     <ClInclude Include="Src\Utils\DataBuffer.h" />

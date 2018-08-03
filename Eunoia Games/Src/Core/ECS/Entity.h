@@ -33,8 +33,9 @@ namespace Eunoia { namespace Core {
 		template<typename Comp>
 		inline void AddComponent(const Comp& comp)
 		{
-			m_components[Comp::ID] = (uint8)malloc(Comp::SIZE);
-			((Comp*)memcpy(m_components[Comp::ID], &comp, Comp::SIZE))->entity = this;
+			m_components[Comp::ID] = (uint8*)malloc(Comp::SIZE);
+			Comp* pComp = (Comp*)memcpy(m_components[Comp::ID], &comp, Comp::SIZE);
+			pComp->entity = this;
 		}
 
 		template<class Comp>
