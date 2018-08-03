@@ -1,5 +1,6 @@
 #include "RenderSystem.h"
 #include "../Components/MeshComponent.h"
+#include "../Components/MaterialComponent.h"
 #include "../Components/TransformComponent.h"
 
 namespace Eunoia { namespace Systems {
@@ -7,6 +8,7 @@ namespace Eunoia { namespace Systems {
 	RenderSystem::RenderSystem()
 	{
 		m_requiredComponents.push_back(Components::MeshComponent::ID);
+		m_requiredComponents.push_back(Components::MaterialComponent::ID);
 		m_requiredComponents.push_back(Components::TransformComponent::ID);
 	}
 
@@ -14,9 +16,11 @@ namespace Eunoia { namespace Systems {
 	{
 		Components::MeshComponent* pMeshComponent = pEntity->GetComponent<Components::MeshComponent>();
 		Components::TransformComponent* pTransformComonent = pEntity->GetComponent<Components::TransformComponent>();
+		Components::MaterialComponent* pMaterialComponent = pEntity->GetComponent<Components::MaterialComponent>();
 
 		Rendering::DrawCommand drawCommand;
-		drawCommand.pModel = &pMeshComponent->meshes;
+		drawCommand.pMesh = pMeshComponent->pMesh;
+		drawCommand.material = pMaterialComponent->material;
 		drawCommand.worldMatrix = pTransformComonent->transform.CreateWorldMatrix();
 
 		pRenderingEngine->Submit(drawCommand);

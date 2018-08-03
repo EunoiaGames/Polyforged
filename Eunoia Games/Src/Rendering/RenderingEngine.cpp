@@ -33,11 +33,11 @@ namespace Eunoia { namespace Rendering {
 
 		for (uint32 i = 0; i < m_drawCommands.size(); i++)
 		{
-			for (uint32 j = 0; j < m_drawCommands[i].pModel->size(); j++)
-			{
-				Mesh* pMesh = m_drawCommands[i].pModel->at(j).pMesh;
-				pMesh->Render();
-			}
+			m_ambientShader->SetBuffer("Transform", SHADER_TYPE_VERTEX);
+			m_ambientShader->SetBufferValue("WorldMatrix", &m_drawCommands[i].worldMatrix);
+			m_ambientShader->UpdateBuffer();
+
+			m_drawCommands[i].pMesh->Render();
 		}
 	}
 

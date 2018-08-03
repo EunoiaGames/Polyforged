@@ -10,10 +10,15 @@ struct VSOutput
 	float3 color : COLOR;
 };
 
+cbuffer Transform : register(b0)
+{
+	float4x4 WorldMatrix;
+};
+
 VSOutput VSMain(VSInput input)
 {
 	VSOutput output;
-	output.pos = float4(input.pos.x, input.pos.y, input.pos.z, 1.0);
+	output.pos = mul(float4(input.pos.x, input.pos.y, input.pos.z, 1.0), WorldMatrix);
 	output.color = input.color;
 	return output;
 }

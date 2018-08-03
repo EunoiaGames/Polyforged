@@ -17,7 +17,7 @@ namespace Eunoia { namespace Core {
 		case Rendering::GRAPHICS_API_D3D11: apiTitle += "D3D11"; break;
 		case Rendering::GRAPHICS_API_OPENGL: apiTitle += "Opengl"; break;
 		}
-		m_pDisplay = Rendering::Display::CreateDisplay(title, width, height, api);
+		m_pDisplay = Rendering::Display::CreateDisplay(apiTitle, width, height, api);
 		m_pRenderingEngine = new Rendering::RenderingEngine();
 	}
 

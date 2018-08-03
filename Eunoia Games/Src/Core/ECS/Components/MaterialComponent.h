@@ -8,6 +8,10 @@ namespace Eunoia { namespace Components {
 
 	DECLARE_COMPONENT(MaterialComponent)
 	{
+		MaterialComponent(const Rendering::Material& material) :
+			material(material)
+		{}
+
 		Rendering::Material material;
 	};
 

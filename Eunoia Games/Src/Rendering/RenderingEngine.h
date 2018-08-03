@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Shader.h"
+#include "Material.h"
 
 #include <vector>
 
@@ -9,7 +10,8 @@ namespace Eunoia { namespace Rendering {
 
 	struct DrawCommand
 	{
-		std::vector<Rendering::MaterialMesh>* pModel;
+		Mesh* pMesh;
+		Material material;
 		Math::Matrix4f worldMatrix;
 	};
 

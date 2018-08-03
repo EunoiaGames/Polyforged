@@ -4,6 +4,7 @@
 #include "../Rendering\Mesh.h"
 #include "../Rendering\Shader.h"
 #include "ECS\Components\MeshComponent.h"
+#include "ECS\Components\MaterialComponent.h"
 #include "ECS\Components\TransformComponent.h"
 #include "ECS\Systems\RenderSystem.h"
 
@@ -30,8 +31,10 @@ namespace Eunoia { namespace Core {
 		componentID id = MeshComponent::ID;
 
 		Entity* pQuad = new Entity();
-		pQuad->AddComponent(MeshComponent(MaterialMesh(pMesh)));
-		pQuad->AddComponent(TransformComponent());
+		pQuad->AddComponent(MeshComponent(pMesh));
+		pQuad->AddComponent(MaterialComponent(Material()));
+		pQuad->AddComponent(TransformComponent(Transform(Vector3f(0.5f, 0.5f), Vector3f(0.5f, 0.5f, 1.0))));
+		pQuad->GetComponent<TransformComponent>()->transform.Rotate(Vector3f(0.0f, 0.0f, 1.0f), 45.0f);
 
 		AddSystem(new RenderSystem());
 		AddEntity(pQuad);
