@@ -235,4 +235,7 @@
     <None Include="Res\Shaders\GLSL\Test.glsl" />
     <None Include="Res\Shaders\HLSL\Test.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="Res\Models\cube.obj" />
+  </ItemGroup>
 </Project>
