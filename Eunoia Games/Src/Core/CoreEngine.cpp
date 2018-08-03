@@ -47,8 +47,8 @@ namespace Eunoia { namespace Core {
 	void CoreEngine::Update(float dt)
 	{
 		m_pApplication->Update(m_pDisplay->GetInput(), dt);
-		m_pDisplay->Update();
 		m_pDisplay->GetInput()->Update();
+		m_pDisplay->Update();
 	}
 
 	void CoreEngine::Render()

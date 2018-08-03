@@ -15,10 +15,18 @@ cbuffer Transform : register(b0)
 	float4x4 WorldMatrix;
 };
 
+cbuffer ViewProjection : register(b1)
+{
+	float4x4 Projection;
+	float4x4 View;
+}
+
 VSOutput VSMain(VSInput input)
 {
 	VSOutput output;
 	output.pos = mul(float4(input.pos.x, input.pos.y, input.pos.z, 1.0), WorldMatrix);
+	output.pos = mul(output.pos, View);
+	output.pos = mul(output.pos, Projection);
 	output.color = input.color;
 	return output;
 }

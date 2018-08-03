@@ -6,7 +6,13 @@
 #include "ECS\Components\MeshComponent.h"
 #include "ECS\Components\MaterialComponent.h"
 #include "ECS\Components\TransformComponent.h"
+#include "ECS\Components\CameraComponent.h"
+#include "ECS\Components\LookAroundComponent.h"
+#include "ECS\Components\MovementComponent.h"
 #include "ECS\Systems\RenderSystem.h"
+#include "ECS\Systems\LookAroundSystem.h"
+#include "ECS\Systems\MovementSystem.h"
+#include "ECS\Systems\ViewProjectionSystem.h"
 
 namespace Eunoia { namespace Core {
 
@@ -33,11 +39,22 @@ namespace Eunoia { namespace Core {
 		Entity* pQuad = new Entity();
 		pQuad->AddComponent(MeshComponent(pMesh));
 		pQuad->AddComponent(MaterialComponent(Material()));
-		pQuad->AddComponent(TransformComponent(Transform(Vector3f(0.5f, 0.5f), Vector3f(0.5f, 0.5f, 1.0))));
+		pQuad->AddComponent(TransformComponent());
 		pQuad->GetComponent<TransformComponent>()->transform.Rotate(Vector3f(0.0f, 0.0f, 1.0f), 45.0f);
 
+		Entity* pCamera = new Entity();
+		pCamera->AddComponent(TransformComponent());
+		pCamera->AddComponent(CameraComponent(70.0f));
+		pCamera->AddComponent(MovementComponent(0.1f));
+		pCamera->AddComponent(LookAroundComponent(3.0f, INPUT_KEY_ESC));
+
 		AddSystem(new RenderSystem());
+		AddSystem(new MovementSystem());
+		AddSystem(new LookAroundSystem());
+		AddSystem(new ViewProjectionSystem());
+
 		AddEntity(pQuad);
+		AddEntity(pCamera);
 	}
 
 	void PolyforgedApplication::Shutdown()
