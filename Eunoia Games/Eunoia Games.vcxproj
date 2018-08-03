@@ -49,6 +49,8 @@
     <ClCompile Include="Src\Rendering\Shader.cpp" />
     <ClCompile Include="Src\Utils\DataBuffer.cpp" />
     <ClCompile Include="Src\Utils\FileReader.cpp" />
+    <ClCompile Include="Src\WorldGen\HeightsGenerator.cpp" />
+    <ClCompile Include="Src\WorldGen\Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Core\Application.h" />
@@ -95,6 +97,8 @@
     <ClInclude Include="Src\Rendering\Vertex.h" />
     <ClInclude Include="Src\Utils\DataBuffer.h" />
     <ClInclude Include="Src\Utils\FileReader.h" />
+    <ClInclude Include="Src\WorldGen\HeightsGenerator.h" />
+    <ClInclude Include="Src\WorldGen\Terrain.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Shaders\GLSL\Test.glsl" />
