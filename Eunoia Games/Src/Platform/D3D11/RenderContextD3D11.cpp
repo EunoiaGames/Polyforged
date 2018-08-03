@@ -12,6 +12,7 @@ namespace Eunoia { namespace Rendering {
 
 		CreateDeviceAndSwapChain();
 		CreateRenderTarget();
+		CreateDepthStencilView();
 		CreateDefaultDepthStencilState();
 		CreateDefaultBlendState();
 		CreateDefaultRasterizerState();
@@ -36,6 +37,7 @@ namespace Eunoia { namespace Rendering {
 	void RenderContextD3D11::Clear() const
 	{
 		m_pDeviceContext->ClearRenderTargetView(m_pRenderTargetView, m_clearColor);
+		m_pDeviceContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0xff);
 	}
 
 	void RenderContextD3D11::Swap() const
@@ -65,7 +67,7 @@ namespace Eunoia { namespace Rendering {
 
 	void RenderContextD3D11::SetDisplayAsRenderTarget() const
 	{
-		m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, NULL);
+		m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 	}
 
 	IDXGISwapChain * RenderContextD3D11::GetSwapChain() const
@@ -122,6 +124,47 @@ namespace Eunoia { namespace Rendering {
 		{
 			std::cerr << "Error creating d3d11 render target chain" << std::endl;
 		}
+	}
+
+	void RenderContextD3D11::CreateDepthStencilView()
+	{
+		DXGI_FORMAT depth_stencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;//DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+		D3D11_TEXTURE2D_DESC depth_stencil_texture_desc{};
+
+		depth_stencil_texture_desc.Width = Display::GetDisplay()->GetWidth();
+		depth_stencil_texture_desc.Height = Display::GetDisplay()->GetHeight();
+		depth_stencil_texture_desc.MipLevels = 1;
+		depth_stencil_texture_desc.ArraySize = 1;
+		depth_stencil_texture_desc.Format = depth_stencil_format;
+		depth_stencil_texture_desc.SampleDesc.Count = 1;
+		depth_stencil_texture_desc.SampleDesc.Quality = 0;
+		depth_stencil_texture_desc.Usage = D3D11_USAGE_DEFAULT;
+		depth_stencil_texture_desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+		depth_stencil_texture_desc.CPUAccessFlags = 0;
+		depth_stencil_texture_desc.MiscFlags = 0;
+
+		ID3D11Texture2D* pDepthStencilTexture;
+		HRESULT err = m_pDevice->CreateTexture2D(&depth_stencil_texture_desc, NULL, &pDepthStencilTexture);
+		if (err != S_OK)
+		{
+			std::cerr << "Error creating d3d11 depth stencil texture" << std::endl;
+		}
+
+		D3D11_DEPTH_STENCIL_VIEW_DESC depth_stencil_view_desc;
+
+		depth_stencil_view_desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		depth_stencil_view_desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+		depth_stencil_view_desc.Texture2D.MipSlice = 0;
+		depth_stencil_view_desc.Flags = 0;
+
+		err = m_pDevice->CreateDepthStencilView(pDepthStencilTexture, &depth_stencil_view_desc, &m_pDepthStencilView);
+
+		if (err != S_OK)
+		{
+			std::cerr << "Error creating d3d11 depth stencil view" << std::endl;
+		}
+
+		pDepthStencilTexture->Release();
 	}
 
 	void RenderContextD3D11::CreateDefaultDepthStencilState()

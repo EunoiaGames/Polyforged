@@ -24,6 +24,7 @@ namespace Eunoia { namespace Rendering {
 	private:
 		void CreateDeviceAndSwapChain();
 		void CreateRenderTarget();
+		void CreateDepthStencilView();
 		void CreateDefaultDepthStencilState();
 		void CreateDefaultBlendState();
 		void CreateDefaultRasterizerState();
@@ -32,6 +33,7 @@ namespace Eunoia { namespace Rendering {
 		ID3D11Device* m_pDevice;
 		ID3D11DeviceContext* m_pDeviceContext;
 		ID3D11RenderTargetView* m_pRenderTargetView;
+		ID3D11DepthStencilView* m_pDepthStencilView;
 
 		ID3D11DepthStencilState* m_pDepthStencilState;
 		ID3D11BlendState* m_pBlendState;

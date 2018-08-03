@@ -105,9 +105,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="Res\Models\cube.obj" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ED7BD6AC-9BD4-49A7-B348-B191F1F2D235}</ProjectGuid>
     <RootNamespace>EunoiaGames</RootNamespace>
