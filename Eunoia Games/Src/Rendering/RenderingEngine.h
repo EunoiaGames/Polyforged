@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Mesh.h"
+#include "LoadedMesh.h"
 #include "Shader.h"
 #include "Material.h"
 
@@ -10,8 +10,7 @@ namespace Eunoia { namespace Rendering {
 
 	struct DrawCommand
 	{
-		Mesh* pMesh;
-		Material material;
+		LoadedMesh mesh;
 		Math::Matrix4f worldMatrix;
 	};
 

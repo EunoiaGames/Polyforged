@@ -44,7 +44,10 @@ namespace Eunoia { namespace Rendering {
 			m_ambientShader->SetBufferValue("WorldMatrix", &m_drawCommands[i].worldMatrix);
 			m_ambientShader->UpdateBuffer();
 
-			m_drawCommands[i].pMesh->Render();
+			for (uint32 j = 0; j < m_drawCommands[i].mesh.size(); j++)
+			{
+				m_drawCommands[i].mesh[j].pMesh->Render();
+			}
 		}
 	}
 

@@ -13,7 +13,7 @@ namespace Eunoia { namespace Core {
 		{
 			for (const auto& it : m_components)
 			{
-				free(it.second);
+				delete it.second;
 			}
 		}
 
@@ -31,10 +31,9 @@ namespace Eunoia { namespace Core {
 		}
 
 		template<typename Comp>
-		inline void AddComponent(const Comp& comp)
+		inline void AddComponent(Comp* pComp)
 		{
-			m_components[Comp::ID] = (uint8*)malloc(Comp::SIZE);
-			Comp* pComp = (Comp*)memcpy(m_components[Comp::ID], &comp, Comp::SIZE);
+			m_components[Comp::ID] = pComp;
 			pComp->entity = this;
 		}
 
@@ -46,7 +45,7 @@ namespace Eunoia { namespace Core {
 				return false;
 			}
 
-			free(m_components[Comp::ID]);
+			delete m_components[Comp::ID];
 			m_components.erase(Comp::ID);
 			return true;
 		}
@@ -58,7 +57,7 @@ namespace Eunoia { namespace Core {
 		}
 
 	private:
-		std::map<componentID, uint8*> m_components;
+		std::map<componentID, void*> m_components;
 	};
 
 } }

@@ -2,18 +2,11 @@
 
 namespace Eunoia { namespace Core {
 
-	std::vector<StaticComponentData> BaseComponent::s_components;
+	uint32 BaseComponent::s_lastComponentID = 0;
 
 	componentID BaseComponent::RegisterComponentType(uint32 size)
 	{
-		componentID id = s_components.size();
-		s_components.push_back(StaticComponentData(size));
-		return id;
-	}
-
-	StaticComponentData & BaseComponent::GetStaticComponentData(componentID id)
-	{
-		return s_components[id];
+		return s_lastComponentID++;
 	}
 
 } }

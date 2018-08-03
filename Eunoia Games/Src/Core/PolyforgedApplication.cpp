@@ -4,7 +4,6 @@
 #include "../Rendering\Mesh.h"
 #include "../Rendering\Shader.h"
 #include "ECS\Components\MeshComponent.h"
-#include "ECS\Components\MaterialComponent.h"
 #include "ECS\Components\TransformComponent.h"
 #include "ECS\Components\CameraComponent.h"
 #include "ECS\Components\LookAroundComponent.h"
@@ -13,6 +12,7 @@
 #include "ECS\Systems\LookAroundSystem.h"
 #include "ECS\Systems\MovementSystem.h"
 #include "ECS\Systems\ViewProjectionSystem.h"
+#include "../Rendering/ModelLoader.h"
 
 namespace Eunoia { namespace Core {
 
@@ -37,16 +37,20 @@ namespace Eunoia { namespace Core {
 		componentID id = MeshComponent::ID;
 
 		Entity* pQuad = new Entity();
-		pQuad->AddComponent(MeshComponent(pMesh));
-		pQuad->AddComponent(MaterialComponent(Material()));
-		pQuad->AddComponent(TransformComponent());
+		pQuad->AddComponent(new MeshComponent(pMesh));
+		pQuad->AddComponent(new TransformComponent());
 		pQuad->GetComponent<TransformComponent>()->transform.Rotate(Vector3f(0.0f, 0.0f, 1.0f), 45.0f);
 
 		Entity* pCamera = new Entity();
-		pCamera->AddComponent(TransformComponent());
-		pCamera->AddComponent(CameraComponent(70.0f));
-		pCamera->AddComponent(MovementComponent(0.1f));
-		pCamera->AddComponent(LookAroundComponent(3.0f, INPUT_KEY_ESC));
+		pCamera->AddComponent(new TransformComponent());
+		pCamera->AddComponent(new CameraComponent(70.0f));
+		pCamera->AddComponent(new MovementComponent(0.1f));
+		pCamera->AddComponent(new LookAroundComponent(3.0f, INPUT_KEY_ESC));
+
+		Entity* pTree = new Entity();
+		pTree->AddComponent(new TransformComponent());
+		pTree->AddComponent(new MeshComponent(ModelLoader::LoadFromFile("Res/Models/cube.obj")));
+		pTree->GetComponent<TransformComponent>()->transform.Scale(1.0f);
 
 		AddSystem(new RenderSystem());
 		AddSystem(new MovementSystem());
@@ -55,6 +59,7 @@ namespace Eunoia { namespace Core {
 
 		AddEntity(pQuad);
 		AddEntity(pCamera);
+		AddEntity(pTree);
 	}
 
 	void PolyforgedApplication::Shutdown()
