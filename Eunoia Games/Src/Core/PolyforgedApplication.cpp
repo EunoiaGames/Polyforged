@@ -13,6 +13,7 @@
 #include "ECS\Systems\MovementSystem.h"
 #include "ECS\Systems\ViewProjectionSystem.h"
 #include "../Rendering/ModelLoader.h"
+#include "ECS\Components\LightComponent.h"
 
 namespace Eunoia { namespace Core {
 
@@ -25,12 +26,10 @@ namespace Eunoia { namespace Core {
 		using namespace Components;
 		using namespace Systems;
 
-
-
-		Vertex vertices[4] = { Vertex(Vector3f(-0.5f, 0.0f, -0.5f), Vector3f(1.0f, 0.0f, 0.0f)),
-			Vertex(Vector3f(-0.5f, 0.0f, 0.5f), Vector3f(0.0f, 1.0f, 0.0f)),
-			Vertex(Vector3f(0.5f, 0.0f, 0.5f), Vector3f(0.0f, 0.0f, 1.0f)),
-			Vertex(Vector3f(0.5f, 0.0f, -0.5f), Vector3f(1.0f, 1.0f, 0.0f)) };
+		Vertex vertices[4] = { Vertex(Vector3f(-0.5f, 0.0f, -0.5f), Vector3f(0.0f, 0.25f, 0.0f)),
+			Vertex(Vector3f(-0.5f, 0.0f, 0.5f), Vector3f(0.0f, 0.25f, 0.0f)),
+			Vertex(Vector3f(0.5f, 0.0f, 0.5f), Vector3f(0.0f, 0.25f, 0.0f)),
+			Vertex(Vector3f(0.5f, 0.2f, -0.5f), Vector3f(0.0f, 0.25f, 0.0f)) };
 
 		uint32 indices[6] = { 0, 1, 2, 0, 2, 3 };
 

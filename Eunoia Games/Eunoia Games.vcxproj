@@ -23,6 +23,7 @@
     <ClCompile Include="Src\Core\CoreEngine.cpp" />
     <ClCompile Include="Src\Core\DisplayInput.cpp" />
     <ClCompile Include="Src\Core\ECS\Component.cpp" />
+    <ClCompile Include="Src\Core\ECS\Systems\LightSystem.cpp" />
     <ClCompile Include="Src\Core\ECS\Systems\LookAroundSystem.cpp" />
     <ClCompile Include="Src\Core\ECS\Systems\MovementSystem.cpp" />
     <ClCompile Include="Src\Core\ECS\Systems\RenderSystem.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="Src\Core\DisplayInput.h" />
     <ClInclude Include="Src\Core\ECS\Component.h" />
     <ClInclude Include="Src\Core\ECS\Components\CameraComponent.h" />
+    <ClInclude Include="Src\Core\ECS\Components\LightComponent.h" />
     <ClInclude Include="Src\Core\ECS\Components\LookAroundComponent.h" />
     <ClInclude Include="Src\Core\ECS\Components\MeshComponent.h" />
     <ClInclude Include="Src\Core\ECS\Components\MovementComponent.h" />
@@ -63,6 +65,7 @@
     <ClInclude Include="Src\Core\ECS\ECSTypes.h" />
     <ClInclude Include="Src\Core\ECS\Entity.h" />
     <ClInclude Include="Src\Core\ECS\System.h" />
+    <ClInclude Include="Src\Core\ECS\Systems\LightSystem.h" />
     <ClInclude Include="Src\Core\ECS\Systems\LookAroundSystem.h" />
     <ClInclude Include="Src\Core\ECS\Systems\MovementSystem.h" />
     <ClInclude Include="Src\Core\ECS\Systems\RenderSystem.h" />

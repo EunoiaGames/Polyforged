@@ -17,6 +17,7 @@ namespace Eunoia { namespace Rendering {
 	void RenderingEngine::Begin()
 	{
 		m_drawCommands.clear();
+		m_directionalLights.clear();
 	}
 
 	void RenderingEngine::Submit(const DrawCommand& drawCommand)
@@ -49,6 +50,11 @@ namespace Eunoia { namespace Rendering {
 				m_drawCommands[i].mesh[j].pMesh->Render();
 			}
 		}
+	}
+
+	void RenderingEngine::SubmitDirectionalLight(const DirectionalLight & light)
+	{
+		m_directionalLights.push_back(light);
 	}
 
 	void RenderingEngine::SetViewProjection(const Math::Matrix4f & view, const Math::Matrix4f & projection)
