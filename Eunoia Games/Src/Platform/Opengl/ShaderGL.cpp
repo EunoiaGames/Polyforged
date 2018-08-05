@@ -1,6 +1,7 @@
 #include "ShaderGL.h"
 #include "../../Utils/FileReader.h"
 #include <sstream>
+#include "../../Math/Math.h"
 
 namespace Eunoia { namespace Rendering {
 
@@ -79,7 +80,13 @@ namespace Eunoia { namespace Rendering {
 
 	void ShaderGL::SetBuffer(const String & name, const void * pValue, ShaderType type)
 	{
+		const auto&& it = m_structUniforms.find(name);
 
+		if (it != m_structUniforms.end())
+		{
+			unsigned int offset = 0;
+			SetStructUniform(name, it->second, pValue, offset);
+		}
 	}
 
 	GLuint ShaderGL::CreateShader(const String & src, GLenum shaderType)
@@ -119,7 +126,47 @@ namespace Eunoia { namespace Rendering {
 
 	void ShaderGL::ParseShader(const String & src)
 	{
-		unsigned int index = src.FindFirstOf("uniform ");
+		int index = src.FindFirstOf("struct ");
+
+		while (index != -1)
+		{
+			int spaceIndex = index + 6;
+			int openBracket = src.FindFirstOf("{", spaceIndex + 1);
+			int newLine = src.FindFirstOf("\n", spaceIndex + 1);
+
+			String name = src.SubString(spaceIndex + 1, MATH_MIN(openBracket, newLine));
+			int endStructIndex = src.FindFirstOf("};", MATH_MAX(openBracket, newLine)) + 1;
+
+			int semicolonIndex = src.FindFirstOf(";", MATH_MAX(openBracket, newLine));
+			newLine = src.FindFirstOf("\n", MATH_MAX(openBracket, newLine));
+
+			ShaderStructDeclarationGL struct_declaration;
+
+			while (semicolonIndex != endStructIndex)
+			{
+				while (src[newLine + 1] == '\t' || src[newLine + 1] == ' ')
+				{
+					newLine++;
+				}
+
+				int spaceIndex = src.FindFirstOf(" ", newLine + 1);
+
+				ShaderStructMemberGL member{};
+
+				member.Type = src.SubString(newLine + 1, spaceIndex);
+				member.Name = src.SubString(spaceIndex + 1, semicolonIndex);
+
+				struct_declaration.Members.push_back(member);
+
+				semicolonIndex = src.FindFirstOf(";", semicolonIndex + 1);
+				newLine = src.FindFirstOf("\n", newLine + 1);
+			}
+
+			m_structDeclarations[name] = struct_declaration;
+			index = src.FindFirstOf("struct ", endStructIndex + 1);
+		}
+
+		index = src.FindFirstOf("uniform ");
 		while (index != -1)
 		{
 			int firstSpaceIndex = src.FindFirstOf(" ", index + 7);
@@ -139,6 +186,16 @@ namespace Eunoia { namespace Rendering {
 				uniformName = uniformName.SubString(0, uniformName.FindFirstOf("["));
 				std::stringstream stringstream(arraySizeStr.C_Str());
 				stringstream >> arraySize;
+			}
+
+			auto structDecIndex = m_structDeclarations.find(uniformType);
+
+			if (structDecIndex != m_structDeclarations.end())
+			{
+				AddStructUniform(structDecIndex->second, uniformName);
+				m_structUniforms[uniformName] = uniformType;
+				index = src.FindFirstOf("uniform ", semicolonIndex + 1);
+				continue;
 			}
 
 			GLint location = glGetUniformLocation(m_program, uniformName.C_Str());
@@ -178,6 +235,84 @@ namespace Eunoia { namespace Rendering {
 			m_globalUniforms[uniformName] = uniform;
 
 			index = src.FindFirstOf("uniform ", semicolonIndex + 1);
+		}
+	}
+
+	void ShaderGL::AddStructUniform(const ShaderStructDeclarationGL & shaderStruct, const String & uniformName)
+	{
+		for (unsigned int i = 0; i < shaderStruct.Members.size(); i++)
+		{
+			const ShaderStructMemberGL& member = shaderStruct.Members[i];
+
+			auto structDecIndex = m_structDeclarations.find(member.Type);
+
+			if (structDecIndex != m_structDeclarations.end())
+			{
+				AddStructUniform(structDecIndex->second, uniformName + "." + member.Name);
+				continue;
+			}
+
+			String finalName = uniformName + "." + member.Name;
+
+			GLint location = glGetUniformLocation(m_program, finalName.C_Str());
+
+			if (location == -1)
+			{
+				std::cerr << "Error finging glsl uniform location : " << finalName << std::endl;
+			}
+
+			ShaderGlobalUniformGL uniform{};
+
+			if (member.Type == "float") uniform.Type = SHADER_VARIABLE_FLOAT;
+			else if (member.Type == "vec2") uniform.Type = SHADER_VARIABLE_VEC2;
+			else if (member.Type == "vec3") uniform.Type = SHADER_VARIABLE_VEC3;
+			else if (member.Type == "mat4") uniform.Type = SHADER_VARIABLE_MAT4;
+
+			uniform.Location = location;
+			uniform.Count = 1;
+
+			m_globalUniforms[finalName] = uniform;
+		}
+	}
+
+	void ShaderGL::SetStructUniform(const String & uniformName, const String & structName, const void * pData, unsigned int & offset)
+	{
+		const ShaderStructDeclarationGL& shaderStruct = m_structDeclarations[structName];
+
+		m_isGlobalUniformBuffer = true;
+
+		for (unsigned int i = 0; i < shaderStruct.Members.size(); i++)
+		{
+			const ShaderStructMemberGL& member = shaderStruct.Members[i];
+
+			auto structTypeIndex = m_structDeclarations.find(member.Type);
+
+			if (structTypeIndex != m_structDeclarations.end())
+			{
+				SetStructUniform(uniformName + "." + member.Name, member.Type, pData, offset);
+				continue;
+			}
+			
+			if (member.Type == "float")
+			{
+				SetBufferValue(uniformName + "." + member.Name, (unsigned char*)pData + offset);
+				offset += sizeof(float);
+			}
+			else if (member.Type == "vec2")
+			{
+				SetBufferValue(uniformName + "." + member.Name, (unsigned char*)pData + offset);
+				offset += sizeof(Math::Vector2f);
+			}
+			else if (member.Type == "vec3")
+			{
+				SetBufferValue(uniformName + "." + member.Name, (unsigned char*)pData + offset);
+				offset += sizeof(Math::Vector3f);
+			}
+			else if (member.Type == "mat4")
+			{
+				SetBufferValue(uniformName + "." + member.Name, (unsigned char*)pData + offset);
+				offset += sizeof(Math::Matrix4f);
+			}
 		}
 	}
 

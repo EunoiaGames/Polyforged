@@ -15,7 +15,9 @@ namespace Eunoia { namespace Components {
 
 		MeshComponent(Rendering::LoadedMesh mesh) :
 			mesh(mesh)
-		{}
+		{
+			
+		}
 
 		Rendering::LoadedMesh mesh;
 	};

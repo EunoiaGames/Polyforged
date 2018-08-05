@@ -12,7 +12,7 @@ struct VSOutput
 
 cbuffer Transform : register(b0)
 {
-	float4x4 WorldMatrix;
+	float4x4 Model;
 };
 
 cbuffer ViewProjection : register(b1)
@@ -24,7 +24,7 @@ cbuffer ViewProjection : register(b1)
 VSOutput VSMain(VSInput input)
 {
 	VSOutput output;
-	output.pos = mul(float4(input.pos.x, input.pos.y, input.pos.z, 1.0), WorldMatrix);
+	output.pos = mul(float4(input.pos.x, input.pos.y, input.pos.z, 1.0), Model);
 	output.pos = mul(output.pos, View);
 	output.pos = mul(output.pos, Projection);
 	output.color = input.color;

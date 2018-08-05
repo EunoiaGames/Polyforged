@@ -30,12 +30,16 @@ namespace Eunoia { namespace Rendering {
 
 		void SetViewProjection(const Math::Matrix4f& view, const Math::Matrix4f& projection);
 	private:
-		Shader* m_ambientShader;
+		Shader* m_pAmbientShader;
+		Shader* m_pDirectionalLightShader;;
+
 		std::vector<DrawCommand> m_drawCommands;
 		std::vector<DirectionalLight> m_directionalLights;
 
 		Math::Matrix4f m_viewMatrix;
 		Math::Matrix4f m_projectionMatrix;
+
+		Math::Vector3f m_ambientColor;
 	};
 
 } }

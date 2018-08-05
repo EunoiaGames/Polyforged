@@ -13,6 +13,17 @@ namespace Eunoia { namespace Rendering {
 		unsigned int		Count;
 	};
 
+	struct ShaderStructMemberGL
+	{
+		String Type;
+		String Name;
+	};
+
+	struct ShaderStructDeclarationGL
+	{
+		std::vector<ShaderStructMemberGL> Members;
+	};
+
 	class ShaderGL : public Shader
 	{
 	public:
@@ -30,6 +41,9 @@ namespace Eunoia { namespace Rendering {
 		void LinkAndValidate();
 		void ParseShader(const String& src);
 
+		void AddStructUniform(const ShaderStructDeclarationGL& shaderStruct, const String& uniformName);
+		void SetStructUniform(const String& uniformName, const String& structName, const void* pData, unsigned int& offset);
+
 		void SetUniformf(GLint location, const float* pValues, unsigned int count) const;
 		void SetUniformi(GLint location, const int* pValues, unsigned int count) const;
 		void SetUniformVec2(GLint location, const float* pVec2s, unsigned int count) const;
@@ -43,6 +57,10 @@ namespace Eunoia { namespace Rendering {
 		GLuint m_shaders[NUM_SHADER_TYPES];
 
 		std::map<String, ShaderGlobalUniformGL> m_globalUniforms;
+
+		std::map<String, ShaderStructDeclarationGL> m_structDeclarations;
+		std::map<String, String> m_structUniforms;
+
 
 		bool m_isGlobalUniformBuffer;
 	};

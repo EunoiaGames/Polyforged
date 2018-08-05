@@ -101,6 +101,11 @@
     <ClInclude Include="Src\WorldGen\Terrain.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Res\Shaders\GLSL\Lighting\Forward\Ambient.glsl" />
+    <None Include="Res\Shaders\GLSL\Lighting\Forward\DirectionalLight.glsl" />
+    <None Include="Res\Shaders\GLSL\Lighting\Forward\LightingMain.glsl" />
+    <None Include="Res\Shaders\GLSL\Lighting\Forward\LightVS.glsl" />
+    <None Include="Res\Shaders\GLSL\Lighting\Lighting.glsl" />
     <None Include="Res\Shaders\GLSL\Test.glsl" />
   </ItemGroup>
   <ItemGroup>

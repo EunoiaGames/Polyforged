@@ -43,20 +43,21 @@ namespace Eunoia { namespace Core {
 		Entity* pCamera = new Entity();
 		pCamera->AddComponent(new TransformComponent());
 		pCamera->AddComponent(new CameraComponent(70.0f));
-		pCamera->AddComponent(new MovementComponent(1.0f));
+		pCamera->AddComponent(new MovementComponent(100.0f));
 		pCamera->AddComponent(new LookAroundComponent(3.0f, INPUT_KEY_ESC));
 
 		Entity* pTree = new Entity();
 		pTree->AddComponent(new TransformComponent());
-		pTree->AddComponent(new MeshComponent(ModelLoader::LoadFromFile("Res/Models/cube.obj")));
-		pTree->GetComponent<TransformComponent>()->transform.Translate(Vector3f(0.0f, 1.1f, 0.0f));
+		pTree->AddComponent(new MeshComponent(ModelLoader::LoadFromFile("Res/Models/knife.dae")));
+		//pTree->GetComponent<TransformComponent>()->transform.Translate(Vector3f(0.0f, 1.1f, 0.0f));
+		MeshComponent* pComp = pTree->GetComponent<MeshComponent>();
 
 		AddSystem(new RenderSystem());
 		AddSystem(new MovementSystem());
 		AddSystem(new LookAroundSystem());
 		AddSystem(new ViewProjectionSystem());
 
-		AddEntity(pQuad);
+		//AddEntity(pQuad);
 		AddEntity(pCamera);
 		AddEntity(pTree);
 	}
