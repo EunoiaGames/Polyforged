@@ -18,7 +18,8 @@ namespace Eunoia { namespace Rendering {
 		{
 			for (uint32 z = 0; z < zsize; z++)
 			{
-				Vertex vertex(Math::Vector3f(x * gap, m_heightsGenerator.GenHeight(x, z, 10.f, 3, 0.3f), z * gap), Math::Vector3f(0.0f, 1.0f, 0.0f));
+				float y = m_heightsGenerator.GenHeight(x * gap, z * gap, 10.f, 3, 0.3f);
+				Vertex vertex(Math::Vector3f(x * gap, y, z * gap), Math::Vector3f(0.0f, 1.0f, 0.0f));
 
 				vertices.push_back(vertex);
 				if ((x != 0 && x != xsize - 1) && (z < zsize - 2))
@@ -27,11 +28,41 @@ namespace Eunoia { namespace Rendering {
 			}
 		}
 
+		uint32 numTriangles = (xsize - 1) * (zsize - 1) * 2;
+		
 		for (uint32 x = 0; x < xsize - 1; x++)
 		{
 			for (uint32 z = 0; z < zsize - 1; z++)
 			{
+				if (z == zsize - 2)
+				{
 
+
+					continue;
+				}
+
+				if (z % 2 == 0)
+				{
+					if (x % 2 == 0)
+					{
+						
+					}
+					else
+					{
+
+					}
+				}
+				else
+				{
+					if (x % 2 == 0)
+					{
+
+					}
+					else
+					{
+
+					}
+				}
 			}
 		}
 	}

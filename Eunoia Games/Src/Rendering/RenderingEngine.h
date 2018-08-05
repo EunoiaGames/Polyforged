@@ -31,7 +31,7 @@ namespace Eunoia { namespace Rendering {
 
 		void SetCamera(const Math::Matrix4f& view, const Math::Matrix4f& projection, const Math::Vector3f& camPos);
 	private:
-		void RenderDrawCommands(Shader* pShader);
+		void RenderDrawCommands(Shader* pShader, bool lightShader);
 	private:
 		Shader* m_pAmbientShader;
 		Shader* m_pDirectionalLightShader;;

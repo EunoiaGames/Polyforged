@@ -22,7 +22,8 @@ namespace Eunoia { namespace Rendering {
 
 	RenderingEngine::~RenderingEngine()
 	{
-
+		delete m_pAmbientShader;
+		delete m_pDirectionalLightShader;
 	}
 
 	void RenderingEngine::Begin()
@@ -50,7 +51,7 @@ namespace Eunoia { namespace Rendering {
 		m_pAmbientShader->UpdateBuffer();
 
 
-		RenderDrawCommands(m_pAmbientShader);
+		RenderDrawCommands(m_pAmbientShader, false);
 
 		m_pDirectionalLightShader->Bind();
 		RenderContext::GetRenderContext()->SetBlendState(m_forwardBlendState);
@@ -61,7 +62,7 @@ namespace Eunoia { namespace Rendering {
 			m_pDirectionalLightShader->SetBuffer("Camera", SHADER_TYPE_FRAGMENT);
 			m_pDirectionalLightShader->SetBufferValue("CamPos", &m_camPos);
 			m_pDirectionalLightShader->UpdateBuffer();
-			RenderDrawCommands(m_pDirectionalLightShader);
+			RenderDrawCommands(m_pDirectionalLightShader, true);
 		}
 		RenderContext::GetRenderContext()->SetBlendState(m_ambientBlendState);
 		RenderContext::GetRenderContext()->SetDepthStencilState(m_ambientDepthStencilState);
@@ -79,7 +80,7 @@ namespace Eunoia { namespace Rendering {
 		m_camPos = camPos;
 	}
 
-	void RenderingEngine::RenderDrawCommands(Shader * pShader)
+	void RenderingEngine::RenderDrawCommands(Shader * pShader, bool lightShader)
 	{
 		pShader->SetBuffer("ViewProjection", SHADER_TYPE_VERTEX);
 		pShader->SetBufferValue("Projection", &m_projectionMatrix);
@@ -94,7 +95,13 @@ namespace Eunoia { namespace Rendering {
 
 			for (uint32 j = 0; j < m_drawCommands[i].mesh.size(); j++)
 			{
-				pShader->UpdateBuffer();
+				if (lightShader)
+				{
+					pShader->SetBuffer("Material", SHADER_TYPE_FRAGMENT);
+					pShader->SetBufferValue("Specular", &m_drawCommands[i].mesh[j].material.specular);
+					pShader->SetBufferValue("Shininess", &m_drawCommands[i].mesh[j].material.shininess);
+					pShader->UpdateBuffer();
+				}
 				m_drawCommands[i].mesh[j].pMesh->Render();
 			}
 		}

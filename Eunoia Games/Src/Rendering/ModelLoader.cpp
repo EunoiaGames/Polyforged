@@ -2,11 +2,11 @@
 
 namespace Eunoia { namespace Rendering {
 
-	LoadedMesh  ModelLoader::LoadFromFile(const String & file)
+	LoadedMesh  ModelLoader::LoadFromFile(const String & file, const Math::Vector3f& specular, float shininess)
 	{
 		Assimp::Importer importer;
 
-		uint32 flags = aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices;
+		uint32 flags = aiProcess_Triangulate | aiProcess_GenNormals | aiProcess_JoinIdenticalVertices;
 
 		const aiScene* pScene = importer.ReadFile(file.C_Str(), flags);
 
@@ -48,7 +48,8 @@ namespace Eunoia { namespace Rendering {
 				indices.push_back(face.mIndices[2]);
 			}
 
-			loadedMesh.push_back(MaterialMesh(Mesh::CreateMesh(&vertices[0], vertices.size(), &indices[0], indices.size(), MESH_USAGE_STATIC)));
+			loadedMesh.push_back(MaterialMesh(Mesh::CreateMesh(&vertices[0], vertices.size(), &indices[0], indices.size(), MESH_USAGE_STATIC),
+				Material(specular, shininess)));
 		}
 
 		return loadedMesh;

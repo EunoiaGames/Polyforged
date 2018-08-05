@@ -272,5 +272,10 @@
     <None Include="Res\Shaders\GLSL\Lighting\Forward\LightingMain.glsl" />
     <None Include="Res\Shaders\GLSL\Lighting\Forward\LightVS.glsl" />
     <None Include="Res\Shaders\GLSL\Lighting\Forward\DirectionalLight.glsl" />
+    <None Include="Res\Shaders\HLSL\Lighting\Forward\DirectionalLight.hlsl" />
+    <None Include="Res\Shaders\HLSL\Lighting\Forward\Ambient.hlsl" />
+    <None Include="Res\Shaders\HLSL\Lighting\Forward\LightingMain.hlsl" />
+    <None Include="Res\Shaders\HLSL\Lighting\Forward\LightVS.hlsl" />
+    <None Include="Res\Shaders\HLSL\Lighting\Lighting.hlsl" />
   </ItemGroup>
 </Project>

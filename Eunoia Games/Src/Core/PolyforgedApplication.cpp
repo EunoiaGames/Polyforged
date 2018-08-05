@@ -58,8 +58,6 @@ namespace Eunoia { namespace Core {
 		//pTree->GetComponent<TransformComponent>()->transform.Translate(Vector3f(0.0f, 1.1f, 0.0f));
 		MeshComponent* pComp = pTree->GetComponent<MeshComponent>();
 
-		
-
 		AddSystem(new RenderSystem());
 		AddSystem(new MovementSystem());
 		AddSystem(new LookAroundSystem());
