@@ -32,8 +32,9 @@ namespace Eunoia { namespace Rendering {
 			{
 				//const aiColor4D& color = pMesh->HasVertexColors(0) ? pMesh->mColors[j][0] : ;
 				const aiVector3D& pos = pMesh->mVertices[j];
+				const aiVector3D& normal = pMesh->mNormals[j];
 
-				Vertex vertex(ToEunoiaVec(pos), Math::Vector3f(1.0f, 1.0f, 1.0f));
+				Vertex vertex(ToEunoiaVec(pos), Math::Vector3f(1.0f, 1.0f, 1.0f), ToEunoiaVec(normal));
 				vertices.push_back(vertex);
 			}
 

@@ -16,7 +16,7 @@ namespace Eunoia { namespace Systems {
 		const Math::Transform& transform = pEntity->GetComponent<Components::TransformComponent>()->transform;
 
 		Math::Matrix4f view = transform.GetRot().GetConjugate().CreateRotationMatrix() * Math::Matrix4f().InitTranslation(transform.GetPos() * -1.0f);
-		pRenderingEngine->SetViewProjection(view, projection);
+		pRenderingEngine->SetCamera(view, projection, transform.GetPos());
 	}
 
 } }

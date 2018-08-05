@@ -14,6 +14,7 @@
 #include "ECS\Systems\ViewProjectionSystem.h"
 #include "../Rendering/ModelLoader.h"
 #include "ECS\Components\LightComponent.h"
+#include "ECS\Systems\LightSystem.h"
 
 namespace Eunoia { namespace Core {
 
@@ -46,20 +47,29 @@ namespace Eunoia { namespace Core {
 		pCamera->AddComponent(new MovementComponent(100.0f));
 		pCamera->AddComponent(new LookAroundComponent(3.0f, INPUT_KEY_ESC));
 
+		Entity* pDirectionalLight = new Entity();
+		pDirectionalLight->AddComponent(new LightComponent(BaseLightInfo(Math::Vector3f(1.0f, 1.0f, 1.0f), 1.0)));
+		pDirectionalLight->AddComponent(new TransformComponent());
+		pDirectionalLight->GetComponent<TransformComponent>()->transform.Rotate(Math::Vector3f(1.0f, 0.0f, 0.0f), -45.0f);
+
 		Entity* pTree = new Entity();
 		pTree->AddComponent(new TransformComponent());
-		pTree->AddComponent(new MeshComponent(ModelLoader::LoadFromFile("Res/Models/knife.dae")));
+		pTree->AddComponent(new MeshComponent(ModelLoader::LoadFromFile("Res/Models/Wolf.obj")));
 		//pTree->GetComponent<TransformComponent>()->transform.Translate(Vector3f(0.0f, 1.1f, 0.0f));
 		MeshComponent* pComp = pTree->GetComponent<MeshComponent>();
+
+		
 
 		AddSystem(new RenderSystem());
 		AddSystem(new MovementSystem());
 		AddSystem(new LookAroundSystem());
 		AddSystem(new ViewProjectionSystem());
+		AddSystem(new LightSystem());
 
 		//AddEntity(pQuad);
 		AddEntity(pCamera);
 		AddEntity(pTree);
+		AddEntity(pDirectionalLight);
 	}
 
 	void PolyforgedApplication::Shutdown()

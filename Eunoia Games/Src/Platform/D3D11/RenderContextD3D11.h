@@ -18,6 +18,9 @@ namespace Eunoia { namespace Rendering {
 		void SetViewport(float x, float y, float w, float h) const override;
 		void SetDisplayAsRenderTarget() const override;
 
+		void SetDepthStencilState(const DepthStencilState& depthStencilState) override;
+		void SetBlendState(const BlendState& blendState) override;
+
 		IDXGISwapChain* GetSwapChain() const;
 		ID3D11Device* GetDevice() const;
 		ID3D11DeviceContext* GetDeviceContext() const;
@@ -28,6 +31,10 @@ namespace Eunoia { namespace Rendering {
 		void CreateDefaultDepthStencilState();
 		void CreateDefaultBlendState();
 		void CreateDefaultRasterizerState();
+
+		D3D11_DEPTH_STENCILOP_DESC GetStencilOperationFace(const StencilOperationFace& face);
+		D3D11_STENCIL_OP GetStencilOperation(StencilOperation operation);
+		D3D11_BLEND GetBlendFunction(BlendFunction blendFunction) const;
 	private:
 		IDXGISwapChain* m_pSwapChain;
 		ID3D11Device* m_pDevice;

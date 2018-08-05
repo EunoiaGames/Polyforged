@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Material.h"
 #include "../Core/ECS/Components/LightComponent.h"
+#include "RenderContext.h"
 
 #include <vector>
 
@@ -28,7 +29,9 @@ namespace Eunoia { namespace Rendering {
 
 		void SubmitDirectionalLight(const DirectionalLight& light);
 
-		void SetViewProjection(const Math::Matrix4f& view, const Math::Matrix4f& projection);
+		void SetCamera(const Math::Matrix4f& view, const Math::Matrix4f& projection, const Math::Vector3f& camPos);
+	private:
+		void RenderDrawCommands(Shader* pShader);
 	private:
 		Shader* m_pAmbientShader;
 		Shader* m_pDirectionalLightShader;;
@@ -38,6 +41,13 @@ namespace Eunoia { namespace Rendering {
 
 		Math::Matrix4f m_viewMatrix;
 		Math::Matrix4f m_projectionMatrix;
+		Math::Vector3f m_camPos;
+
+		BlendState m_ambientBlendState;
+		BlendState m_forwardBlendState;
+
+		DepthStencilState m_ambientDepthStencilState;
+		DepthStencilState m_forwardDepthStencilState;
 
 		Math::Vector3f m_ambientColor;
 	};

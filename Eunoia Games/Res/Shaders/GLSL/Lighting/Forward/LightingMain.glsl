@@ -6,5 +6,5 @@ uniform vec3 CamPos;
 
 void main()
 {
-	outColor = CalcForwardRender(normal0, CamPos, worldPos0, color0);
+	outColor = CalcForwardRender(normalize(normal0), CamPos, worldPos0, color0);
 }

@@ -16,18 +16,38 @@ namespace Eunoia { namespace Rendering {
 
 	struct BaseLightInfo
 	{
+		BaseLightInfo(const Math::Vector3f& color, float intensity) :
+			color(color),
+			intensity(intensity)
+		{}
+
+		BaseLightInfo() {}
+
 		Math::Vector3f color;
 		float intensity;
 	};
 
 	struct PointLightInfo
 	{
+		PointLightInfo(const Math::Attenuation& attenuation, float range) :
+			attenuation(attenuation),
+			range(range)
+		{}
+
+		PointLightInfo() {}
+
 		Math::Attenuation attenuation;
 		float range;
 	};
 	
 	struct SpotLightInfo
 	{
+		SpotLightInfo(float cutoff) :
+			cutoff(cutoff)
+		{}
+
+		SpotLightInfo() {}
+
 		float cutoff;
 	};
 
@@ -56,6 +76,28 @@ namespace Eunoia { namespace Components {
 
 	DECLARE_COMPONENT(LightComponent)
 	{
+		LightComponent(Rendering::LightType lightType, const Rendering::BaseLightInfo& baseLight) :
+			lightType(lightType),
+			baseLight(baseLight)
+		{}
+
+		LightComponent(const Rendering::BaseLightInfo& baseLight) :
+			lightType(Rendering::LIGHT_TYPE_DIRECTIONAL),
+			baseLight(baseLight)
+		{}
+
+		LightComponent(const Rendering::BaseLightInfo& baseLight, const Rendering::PointLightInfo& pointLight) :
+			lightType(Rendering::LIGHT_TYPE_POINT),
+			baseLight(baseLight),
+			pointLight(pointLight)
+		{}
+
+		LightComponent(const Rendering::BaseLightInfo& baseLight, const Rendering::SpotLightInfo& spotLight) :
+			lightType(Rendering::LIGHT_TYPE_SPOT),
+			baseLight(baseLight),
+			spotLight(spotLight)
+		{}
+
 		Rendering::LightType lightType;
 		Rendering::BaseLightInfo baseLight;
 		Rendering::PointLightInfo pointLight;

@@ -19,6 +19,7 @@ namespace Eunoia { namespace Rendering {
 
 		glVertexAttribPointer(VERTEX_ATTRIBUTE_POS, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::pos));
 		glVertexAttribPointer(VERTEX_ATTRIBUTE_COLOR, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::color));
+		glVertexAttribPointer(VERTEX_ATTRIBUTE_NORMAL, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::normal));
 
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

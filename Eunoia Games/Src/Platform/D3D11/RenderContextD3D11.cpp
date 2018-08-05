@@ -70,6 +70,68 @@ namespace Eunoia { namespace Rendering {
 		m_pDeviceContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 	}
 
+	void RenderContextD3D11::SetDepthStencilState(const DepthStencilState & depthStencilState)
+	{
+		D3D11_DEPTH_STENCIL_DESC depth_stencil_desc;
+
+		depth_stencil_desc.DepthEnable = depthStencilState.depthEnabled;
+		depth_stencil_desc.DepthWriteMask = depthStencilState.depthWrite ? D3D11_DEPTH_WRITE_MASK_ALL : D3D11_DEPTH_WRITE_MASK_ZERO;
+
+		switch (depthStencilState.depthComparison)
+		{
+		case DEPTH_COMPARISON_ALWAYS: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_ALWAYS; break;
+		case DEPTH_COMPARISON_NEVER: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_NEVER; break;
+		case DEPTH_COMPARISON_LESS: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_LESS; break;
+		case DEPTH_COMPARISON_GREATER: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_GREATER; break;
+		case DEPTH_COMPARISON_LESS_EQUAL: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL; break;
+		case DEPTH_COMPARISON_GREATER_EQUAL: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_GREATER_EQUAL; break;
+		case DEPTH_COMPARISON_EQUAL: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_EQUAL; break;
+		case DEPTH_COMPARISON_NOT_EQUAL: depth_stencil_desc.DepthFunc = D3D11_COMPARISON_NOT_EQUAL; break;
+		}
+
+		depth_stencil_desc.StencilEnable = depthStencilState.stencilEnabled;
+		depth_stencil_desc.StencilReadMask = depthStencilState.mask;
+		depth_stencil_desc.StencilWriteMask = depthStencilState.mask;
+
+		depth_stencil_desc.BackFace = GetStencilOperationFace(depthStencilState.backFace);
+		depth_stencil_desc.FrontFace = GetStencilOperationFace(depthStencilState.frontFace);
+
+		m_pDepthStencilState->Release();
+		m_pDevice->CreateDepthStencilState(&depth_stencil_desc, &m_pDepthStencilState);
+		m_pDeviceContext->OMSetDepthStencilState(m_pDepthStencilState, depthStencilState.ref);
+	}
+
+	void RenderContextD3D11::SetBlendState(const BlendState & blendState)
+	{
+		D3D11_RENDER_TARGET_BLEND_DESC blend_desc;
+		blend_desc.BlendEnable = blendState.enabled;
+
+		switch (blendState.operation)
+		{
+		case BLEND_OPERATION_ADD: blend_desc.BlendOp = D3D11_BLEND_OP_ADD; break;
+		case BLEND_OPERATION_SUB: blend_desc.BlendOp = D3D11_BLEND_OP_SUBTRACT; break;
+		case BLEND_OPERATION_REV_SUB: blend_desc.BlendOp = D3D11_BLEND_OP_REV_SUBTRACT; break;
+		case BLEND_OPERATION_MIN: blend_desc.BlendOp = D3D11_BLEND_OP_MIN; break;
+		case BLEND_OPERATION_MAX: blend_desc.BlendOp = D3D11_BLEND_OP_MAX; break;
+		}
+
+		blend_desc.SrcBlend = GetBlendFunction(blendState.srcFunction);
+		blend_desc.DestBlend = GetBlendFunction(blendState.destFunction);
+		blend_desc.SrcBlendAlpha = D3D11_BLEND_ONE;
+		blend_desc.DestBlendAlpha = D3D11_BLEND_ZERO;
+		blend_desc.BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		blend_desc.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+		D3D11_BLEND_DESC blend_desc_;
+		blend_desc_.AlphaToCoverageEnable = false;
+		blend_desc_.IndependentBlendEnable = false;
+		blend_desc_.RenderTarget[0] = blend_desc;
+
+		m_pBlendState->Release();
+		m_pDevice->CreateBlendState(&blend_desc_, &m_pBlendState);
+		m_pDeviceContext->OMSetBlendState(m_pBlendState, NULL, 0xffffffff);
+	}
+
 	IDXGISwapChain * RenderContextD3D11::GetSwapChain() const
 	{
 		return m_pSwapChain;
@@ -237,6 +299,60 @@ namespace Eunoia { namespace Rendering {
 		}
 
 		m_pDeviceContext->RSSetState(m_pRasterizerState);
+	}
+
+	D3D11_DEPTH_STENCILOP_DESC RenderContextD3D11::GetStencilOperationFace(const StencilOperationFace & face)
+	{
+		D3D11_DEPTH_STENCILOP_DESC stencil_op_desc;
+		stencil_op_desc.StencilDepthFailOp = GetStencilOperation(face.depthFail);
+		stencil_op_desc.StencilFailOp = GetStencilOperation(face.stencilFail);
+		stencil_op_desc.StencilPassOp = GetStencilOperation(face.stencilPass);
+
+		switch (face.comparison)
+		{
+		case STENCIL_COMPARISON_NEVER: stencil_op_desc.StencilFunc = D3D11_COMPARISON_NEVER; break;
+		case STENCIL_COMPARISON_LESS: stencil_op_desc.StencilFunc = D3D11_COMPARISON_LESS; break;
+		case STENCIL_COMPARISON_LESS_EQUAL: stencil_op_desc.StencilFunc = D3D11_COMPARISON_LESS_EQUAL; break;
+		case STENCIL_COMPARISON_GREATER: stencil_op_desc.StencilFunc = D3D11_COMPARISON_GREATER; break;
+		case STENCIL_COMPARISON_GREATER_EQUAL: stencil_op_desc.StencilFunc = D3D11_COMPARISON_GREATER_EQUAL; break;
+		case STENCIL_COMPARISON_EQUAL: stencil_op_desc.StencilFunc = D3D11_COMPARISON_EQUAL; break;
+		case STENCIL_COMPARISON_NOT_EQUAL: stencil_op_desc.StencilFunc = D3D11_COMPARISON_NOT_EQUAL; break;
+		case STENCIL_COMPARISON_ALWAYS: stencil_op_desc.StencilFunc = D3D11_COMPARISON_ALWAYS; break;
+		}
+
+		return stencil_op_desc;
+	}
+
+	D3D11_STENCIL_OP RenderContextD3D11::GetStencilOperation(StencilOperation operation)
+	{
+		switch (operation)
+		{
+		case STENCIL_OPERATION_KEEP: return D3D11_STENCIL_OP_KEEP;
+		case STENCIL_OPERATION_ZERO: return D3D11_STENCIL_OP_ZERO;
+		case STENCIL_OPERATION_REPLACE: return D3D11_STENCIL_OP_REPLACE;
+		case STENCIL_OPERATION_INCR_CLAMP: return D3D11_STENCIL_OP_INCR_SAT;
+		case STENCIL_OPERATION_DECR_CLAMP: return D3D11_STENCIL_OP_DECR_SAT;
+		case STENCIL_OPERATION_INVERT: return D3D11_STENCIL_OP_INVERT;
+		case STENCIL_OPERATION_INCR: return D3D11_STENCIL_OP_INCR;
+		case STENCIL_OPERATION_DECR: return D3D11_STENCIL_OP_DECR;
+		}
+	}
+
+	D3D11_BLEND RenderContextD3D11::GetBlendFunction(BlendFunction blendFunction) const
+	{
+		switch (blendFunction)
+		{
+		case BLEND_FUNCTION_ZERO: return D3D11_BLEND_ZERO;
+		case BLEND_FUNCTION_ONE: return D3D11_BLEND_ONE;
+		case BLEND_FUNCTION_SRC_COLOR: return D3D11_BLEND_SRC_COLOR;
+		case BLEND_FUNCTION_INV_SOURCE_COLOR: return D3D11_BLEND_INV_SRC_COLOR;
+		case BLEND_FUNCTION_DEST_COLOR: return D3D11_BLEND_DEST_COLOR;
+		case BLEND_FUNCTION_INV_DEST_COLOR: return D3D11_BLEND_INV_DEST_COLOR;
+		case BLEND_FUNCTION_SRC_ALPHA: return D3D11_BLEND_SRC_ALPHA;
+		case BLEND_FUNCTION_SRC_INV_ALPHA: return D3D11_BLEND_INV_SRC_ALPHA;
+		case BLEND_FUNCTION_DEST_ALPHA: return D3D11_BLEND_DEST_ALPHA;
+		case BLEND_FUNCTION_DEST_INV_ALPHA: return D3D11_BLEND_INV_DEST_ALPHA;
+		}
 	}
 
 } }

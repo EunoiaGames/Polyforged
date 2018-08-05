@@ -7,11 +7,11 @@
 
 #include Res/Shaders/GLSL/Lighting/Lighting.glsl
 
-uniform DirectionalLight directionalLight;
+uniform DirectionalLight Light;
 
 vec4 CalcForwardRender(vec3 normal, vec3 camPos, vec3 worldPos, vec3 albedo)
 {
-	return CalcDirectionalLight(directionalLight, normal, camPos, worldPos, albedo);
+	return CalcDirectionalLight(Light, normal, camPos, worldPos, albedo);
 }
 
 #include Res/Shaders/GLSL/Lighting/Forward/LightingMain.glsl

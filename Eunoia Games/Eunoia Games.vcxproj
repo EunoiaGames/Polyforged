@@ -46,6 +46,7 @@
     <ClCompile Include="Src\Rendering\ModelLoader.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
     <ClCompile Include="Src\Rendering\RenderingEngine.cpp" />
+    <ClCompile Include="Src\Rendering\RenderStates\RenderStates.cpp" />
     <ClCompile Include="Src\Rendering\Shader.cpp" />
     <ClCompile Include="Src\Utils\DataBuffer.cpp" />
     <ClCompile Include="Src\Utils\FileReader.cpp" />
@@ -93,6 +94,9 @@
     <ClInclude Include="Src\Rendering\ModelLoader.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />
     <ClInclude Include="Src\Rendering\RenderingEngine.h" />
+    <ClInclude Include="Src\Rendering\RenderStates\BlendState.h" />
+    <ClInclude Include="Src\Rendering\RenderStates\DepthStencilState.h" />
+    <ClInclude Include="Src\Rendering\RenderStates\RenderStates.h" />
     <ClInclude Include="Src\Rendering\Shader.h" />
     <ClInclude Include="Src\Rendering\Vertex.h" />
     <ClInclude Include="Src\Utils\DataBuffer.h" />
