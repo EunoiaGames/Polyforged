@@ -4,7 +4,7 @@ namespace Eunoia { namespace Rendering {
 
 	MeshGL::MeshGL(const Vertex * pVertices, uint32 numVertices, const uint32 * pIndices, uint32 numIndices, MeshUsage usage)
 	{
-		m_numIndices = numIndices;
+		m_count = numIndices;
 
 		glGenVertexArrays(1, &m_vao);
 		glGenBuffers(1, &m_vbo);
@@ -26,11 +26,34 @@ namespace Eunoia { namespace Rendering {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
+	MeshGL::MeshGL(const Vertex * pVertices, uint32 numVertices, MeshUsage usage)
+	{
+		m_count = numVertices;
+		m_ibo = 0;
+
+		glGenVertexArrays(1, &m_vao);
+		glGenBuffers(1, &m_vbo);
+
+		glBindVertexArray(m_vao);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+
+		glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * numVertices, pVertices, GetUsage(usage));
+
+		glVertexAttribPointer(VERTEX_ATTRIBUTE_POS, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::pos));
+		glVertexAttribPointer(VERTEX_ATTRIBUTE_COLOR, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::color));
+		glVertexAttribPointer(VERTEX_ATTRIBUTE_NORMAL, 3, GL_FLOAT, false, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, Vertex::normal));
+
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
 	MeshGL::~MeshGL()
 	{
 		glDeleteVertexArrays(1, &m_vao);
 		glDeleteBuffers(1, &m_vbo);
-		glDeleteBuffers(1, &m_ibo);
+
+		if(m_ibo)
+			glDeleteBuffers(1, &m_ibo);
 	}
 
 	void MeshGL::Render() const
@@ -40,9 +63,16 @@ namespace Eunoia { namespace Rendering {
 		for (uint32 i = 0; i < NUM_VERTEX_ATTRIBUTES; i++)
 			glEnableVertexAttribArray(i);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-		glDrawElements(GL_TRIANGLES, m_numIndices, GL_UNSIGNED_INT, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		if (m_ibo == 0)
+		{
+			glDrawArrays(GL_TRIANGLES, 0, m_count);
+		}
+		else
+		{
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
+			glDrawElements(GL_TRIANGLES, m_count, GL_UNSIGNED_INT, NULL);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
 
 		for (uint32 i = 0; i < NUM_VERTEX_ATTRIBUTES; i++)
 			glDisableVertexAttribArray(i);

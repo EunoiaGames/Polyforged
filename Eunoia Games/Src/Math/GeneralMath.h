@@ -4,7 +4,7 @@
 #include "../Core/Common.h"
 
 // Math contants
-#define MATH_PI		3.14159265358979323846
+#define MATH_PI			3.14159265358979323846
 #define MATH_E			2.71828182845904523536
 #define MATH_SQRT2		1.41421356237309504880
 

@@ -22,5 +22,8 @@ namespace Eunoia { namespace Rendering {
 
 		static Mesh* CreateMesh(const Vertex* pVertices, uint32 numVertices, const uint32* pIndices, uint32 numIndices, MeshUsage usage);
 		static Mesh* CreateMesh(const std::vector<Vertex>& vertices, const std::vector<uint32>& indices, MeshUsage usage);
+
+		static Mesh* CreateMesh(const Vertex* pVertices, uint32 numVertices, MeshUsage usage);
+		static Mesh* CreateMesh(const std::vector<Vertex>& vertices, MeshUsage usage);
 	};
 } }

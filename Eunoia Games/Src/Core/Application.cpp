@@ -19,8 +19,9 @@ namespace Eunoia { namespace Core {
 			const std::vector<componentID>& requiredComponents = m_systems[i]->GetRequiredComponents();
 			for (uint32 j = 0; j < m_entities.size(); j++)
 			{
-				if (m_entities[j]->IsValidForSystem(requiredComponents))
-					m_systems[i]->Update(m_entities[j], pInput, dt);
+				if(m_entities[j]->flags.updatable)
+					if (m_entities[j]->IsValidForSystem(requiredComponents))
+						m_systems[i]->Update(m_entities[j], pInput, dt);
 			}
 		}
 	}
@@ -33,8 +34,9 @@ namespace Eunoia { namespace Core {
 			const std::vector<componentID>& requiredComponents = m_systems[i]->GetRequiredComponents();
 			for (uint32 j = 0; j < m_entities.size(); j++)
 			{
-				if (m_entities[j]->IsValidForSystem(requiredComponents))
-					m_systems[i]->Render(m_entities[j], pRenderingEngine);
+				if (m_entities[j]->flags.renderable)
+					if (m_entities[j]->IsValidForSystem(requiredComponents))
+						m_systems[i]->Render(m_entities[j], pRenderingEngine);
 			}
 		}
 		pRenderingEngine->End();

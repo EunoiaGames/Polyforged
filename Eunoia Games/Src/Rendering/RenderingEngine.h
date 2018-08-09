@@ -5,6 +5,7 @@
 #include "Material.h"
 #include "../Core/ECS/Components/LightComponent.h"
 #include "RenderContext.h"
+#include "../Water/WaterTile.h"
 
 #include <vector>
 

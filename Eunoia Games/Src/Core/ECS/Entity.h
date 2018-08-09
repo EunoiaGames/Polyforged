@@ -6,6 +6,17 @@
 
 namespace Eunoia { namespace Core {
 
+	struct EntityFlags
+	{
+		EntityFlags():
+			updatable(true),
+			renderable(true)
+		{}
+
+		bool updatable;
+		bool renderable;
+	};
+
 	class Entity
 	{
 	public:
@@ -55,6 +66,8 @@ namespace Eunoia { namespace Core {
 		{ 
 			return (Comp*)m_components[Comp::ID];
 		}
+
+		EntityFlags flags;
 
 	private:
 		std::map<componentID, void*> m_components;

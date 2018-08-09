@@ -15,6 +15,7 @@
 #include "../Rendering/ModelLoader.h"
 #include "ECS\Components\LightComponent.h"
 #include "ECS\Systems\LightSystem.h"
+#include "../Water/WaterTile.h"
 
 namespace Eunoia { namespace Core {
 

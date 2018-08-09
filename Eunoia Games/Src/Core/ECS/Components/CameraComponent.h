@@ -15,7 +15,7 @@ namespace Eunoia { namespace Components {
 
 		CameraComponent(float fov = 70.0f) 
 		{
-			projection.InitPerspective(fov, Rendering::Display::GetDisplay()->GetWidth(), Rendering::Display::GetDisplay()->GetHeight(), 0.01f, 1000.0f);
+			projection.InitPerspective(fov, Rendering::Display::GetDisplay()->GetWidth(), Rendering::Display::GetDisplay()->GetHeight(), 0.01f, 10000.0f);
 		}
 
 		Math::Matrix4f projection;

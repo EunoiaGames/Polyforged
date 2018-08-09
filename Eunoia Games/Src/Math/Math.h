@@ -451,7 +451,7 @@ namespace Eunoia { namespace Math {
 
 		inline Vector3<T> Cross(const Vector3<T>& vec) const
 		{
-			Vector3<float>(GetY() * vec.GetZ() - GetZ() * vec.GetY(),
+			return Vector3<float>(GetY() * vec.GetZ() - GetZ() * vec.GetY(),
 				GetZ() * vec.GetX() - GetX() * vec.GetZ(),
 				GetX() * vec.GetY() - GetY() * vec.GetX());
 		}

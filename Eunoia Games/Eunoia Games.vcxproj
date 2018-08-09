@@ -34,9 +34,11 @@
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Math\Transform.cpp" />
     <ClCompile Include="Src\Platform\D3D11\MeshD3D11.cpp" />
+    <ClCompile Include="Src\Platform\D3D11\NoDataMeshD3D11.cpp" />
     <ClCompile Include="Src\Platform\D3D11\RenderContextD3D11.cpp" />
     <ClCompile Include="Src\Platform\D3D11\ShaderD3D11.cpp" />
     <ClCompile Include="Src\Platform\Opengl\MeshGL.cpp" />
+    <ClCompile Include="Src\Platform\Opengl\NoDataMeshGL.cpp" />
     <ClCompile Include="Src\Platform\Opengl\RenderContextGL.cpp" />
     <ClCompile Include="Src\Platform\Opengl\ShaderGL.cpp" />
     <ClCompile Include="Src\Platform\Windows\Win32Display.cpp" />
@@ -44,14 +46,16 @@
     <ClCompile Include="Src\Rendering\Display.cpp" />
     <ClCompile Include="Src\Rendering\Mesh.cpp" />
     <ClCompile Include="Src\Rendering\ModelLoader.cpp" />
+    <ClCompile Include="Src\Rendering\NoDataMesh.cpp" />
     <ClCompile Include="Src\Rendering\RenderContext.cpp" />
     <ClCompile Include="Src\Rendering\RenderingEngine.cpp" />
     <ClCompile Include="Src\Rendering\RenderStates\RenderStates.cpp" />
     <ClCompile Include="Src\Rendering\Shader.cpp" />
+    <ClCompile Include="Src\Terrain\TerrainChunk.cpp" />
     <ClCompile Include="Src\Utils\DataBuffer.cpp" />
     <ClCompile Include="Src\Utils\FileReader.cpp" />
-    <ClCompile Include="Src\WorldGen\HeightsGenerator.cpp" />
-    <ClCompile Include="Src\WorldGen\Terrain.cpp" />
+    <ClCompile Include="Src\Terrain\HeightsGenerator.cpp" />
+    <ClCompile Include="Src\Water\WaterTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Core\Application.h" />
@@ -80,9 +84,11 @@
     <ClInclude Include="Src\Math\Math.h" />
     <ClInclude Include="Src\Math\Transform.h" />
     <ClInclude Include="Src\Platform\D3D11\MeshD3D11.h" />
+    <ClInclude Include="Src\Platform\D3D11\NoDataMeshD3D11.h" />
     <ClInclude Include="Src\Platform\D3D11\RenderContextD3D11.h" />
     <ClInclude Include="Src\Platform\D3D11\ShaderD3D11.h" />
     <ClInclude Include="Src\Platform\Opengl\MeshGL.h" />
+    <ClInclude Include="Src\Platform\Opengl\NoDataMeshGL.h" />
     <ClInclude Include="Src\Platform\Opengl\RenderContextGL.h" />
     <ClInclude Include="Src\Platform\Opengl\ShaderGL.h" />
     <ClInclude Include="Src\Platform\Windows\Win32Display.h" />
@@ -92,6 +98,7 @@
     <ClInclude Include="Src\Rendering\Material.h" />
     <ClInclude Include="Src\Rendering\Mesh.h" />
     <ClInclude Include="Src\Rendering\ModelLoader.h" />
+    <ClInclude Include="Src\Rendering\NoDataMesh.h" />
     <ClInclude Include="Src\Rendering\RenderContext.h" />
     <ClInclude Include="Src\Rendering\RenderingEngine.h" />
     <ClInclude Include="Src\Rendering\RenderStates\BlendState.h" />
@@ -101,8 +108,9 @@
     <ClInclude Include="Src\Rendering\Vertex.h" />
     <ClInclude Include="Src\Utils\DataBuffer.h" />
     <ClInclude Include="Src\Utils\FileReader.h" />
-    <ClInclude Include="Src\WorldGen\HeightsGenerator.h" />
-    <ClInclude Include="Src\WorldGen\Terrain.h" />
+    <ClInclude Include="Src\Terrain\HeightsGenerator.h" />
+    <ClInclude Include="Src\Terrain\TerrainChunk.h" />
+    <ClInclude Include="Src\Water\WaterTile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Shaders\GLSL\Lighting\Forward\Ambient.glsl" />
@@ -113,6 +121,7 @@
     <None Include="Res\Shaders\GLSL\Test.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Res\Shaders\GLSL\Water\Water.glsl" />
     <None Include="Res\Shaders\HLSL\Test.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <FileType>Document</FileType>

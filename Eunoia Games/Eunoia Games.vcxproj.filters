@@ -105,13 +105,25 @@
     <ClCompile Include="Src\Core\ECS\Systems\LightSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\WorldGen\HeightsGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\WorldGen\Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Rendering\RenderStates\RenderStates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Terrain\HeightsGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Terrain\TerrainChunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Water\WaterTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Platform\Opengl\NoDataMeshGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Rendering\NoDataMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Platform\D3D11\NoDataMeshD3D11.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,12 +260,6 @@
     <ClInclude Include="Src\Core\ECS\Components\LightComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\WorldGen\HeightsGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\WorldGen\Terrain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Rendering\RenderStates\DepthStencilState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -261,6 +267,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Rendering\RenderStates\RenderStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Terrain\HeightsGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Terrain\TerrainChunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Water\WaterTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Rendering\NoDataMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Platform\Opengl\NoDataMeshGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Platform\D3D11\NoDataMeshD3D11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -277,5 +301,6 @@
     <None Include="Res\Shaders\HLSL\Lighting\Forward\LightingMain.hlsl" />
     <None Include="Res\Shaders\HLSL\Lighting\Forward\LightVS.hlsl" />
     <None Include="Res\Shaders\HLSL\Lighting\Lighting.hlsl" />
+    <None Include="Res\Shaders\GLSL\Water\Water.glsl" />
   </ItemGroup>
 </Project>
